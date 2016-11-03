@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <input type="text" class="input-sm" maxlength="13" id="tel"  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+
+
+</div>
+
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+   var prevalue='';
+   var tel=document.querySelector('#tel');
+    var maxlength=tel.getAttribute('maxlength');
+    tel.oninput=function(){
+        if (prevalue.length<this.value.length||this.value.length==0){//输入数据
+            var value=this.value;
+            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+            if (reg.test(prevalue)){//测试删除后是 123-1234再输入
+                res=prevalue+'-'+value.charAt(value.length-1);
+            }else{
+                var res=value.replace(reg,function(){
+                    return arguments[0]+'-';
+                });
+            }
+            this.value=res;
+            prevalue=this.value;
+        }else if (this.value.length!=3&&this.value.length!=8){//删除数据   删除后是123-232再输入
+            var value=this.value;
+            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+            var res=value.replace(reg,function(){
+                return arguments[0]+'-';
+            });
+            this.value=res;
+            prevalue=this.value;
+        }else{
+            prevalue=this.value;//删除-
+        }
+//        if (prevalue.length<this.value.length||this.value.length==0){
+//                var value=this.value;
+//                var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+//                if (reg.test(prevalue)){//测试删除后是 123-1234再输入
+//                    res=prevalue+'-'+value.charAt(value.length-1);
+//                }else{
+//                    var res=value.replace(reg,function(){
+//                        return arguments[0]+'-';
+//                    });
+//                }
+//                this.value=res;
+//                prevalue=this.value;
+//
+//
+//        }else if (this.value.length!=3&&this.value.length!=8){//删除后是123-232再输入
+//            var value=this.value;
+//            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+//            var res=value.replace(reg,function(){
+//                return arguments[0]+'-';
+//            });
+//            this.value=res;
+//            prevalue=this.value;
+//        }else{
+//            value=this.value;
+//            if(this.value.length==3||this.value.length==8){
+//                value=value+'-';
+//            }
+//
+//            prevalue=this.value;
+////            this.value=value;
+//        }
+//        if (prevalue.length<this.value.length||this.value.length==0){
+//            console.log(1)
+//
+//            var value=this.value;
+//            if(prevalue.length==4||prevalue.length==9){
+//                value=value+'-';
+//            }
+//            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+//            var res=value.replace(reg,function(){
+//                return arguments[0]+'-';
+//            });
+//            this.value=res;
+//            prevalue=this.value
+//        }else if (this.value.length!=5&&this.value.length!=10){
+//            console.log(2)
+//            var value=this.value;
+//            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+//            var res=value.replace(reg,function(){
+//                return arguments[0]+'-';
+//            });
+//            this.value=res;
+//            prevalue=this.value;
+//        }else{
+//            console.log(3)
+//            console.log(prevalue+' ' +this.value)
+//            this.value=this.value.substr(0,this.value.length-2);
+//            prevalue=this.value;
+//        }
+//        if (prevalue.length<this.value.length||this.value.length==0||(this.value.length!=5&&this.value.length!=10)){
+//
+//            var value=this.value;
+//            var reg=/^(\d{3})$|^(\d{3}-\d{4})$/g;
+//            var res=value.replace(reg,function(){
+//                return arguments[0]+'-';
+//            });
+//            this.value=res;
+//            prevalue=this.value
+//        }else{
+//            this.value=this.value.substr(0,this.value.length-2);
+//            prevalue=this.value;
+//        }
+
+    }
+
+</script>
